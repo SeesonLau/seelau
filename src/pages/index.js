@@ -5,6 +5,7 @@ import Section2 from '@/components/index/section2';
 import Section3 from '@/components/index/section3';
 import Section4 from '@/components/index/section4';
 import styles from '@/styles/Home.module.css';
+import SectionNav from '@/components/sectionNav';
 import Link from 'next/link';
 
 export default function Home({ hobbies }) {
@@ -84,6 +85,8 @@ export default function Home({ hobbies }) {
         className={styles.particlesCanvas}
       ></canvas>
 
+    <SectionNav/>
+
       {/* Page content */}
       <div className={styles.container}>
         <section className={styles.hero}>
@@ -110,10 +113,22 @@ export default function Home({ hobbies }) {
           </div>
         </section>
 
-        <Section1 />
-        <Section3 />
-        <Section4 hobbies={hobbies} />
-        <Section2 />
+        <section id="section1">
+          <Section1 />
+        </section>
+        
+        <section id="section3">
+          <Section3 />
+        </section>
+        
+        <section id="section4">
+          <Section4 hobbies={hobbies} />
+        </section>
+        
+        <section id="section2">
+          <Section2 />
+        </section>
+
       </div>
     </Layout>
   );

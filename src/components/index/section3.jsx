@@ -106,13 +106,13 @@ const Section3 = () => {
               className={`${styles.typeButton} ${projectType === 'software' ? styles.active : ''}`}
               onClick={() => toggleProjectType('software')}
             >
-              Software Projects
+              Software
             </button>
             <button
               className={`${styles.typeButton} ${projectType === 'hardware' ? styles.active : ''}`}
               onClick={() => toggleProjectType('hardware')}
             >
-              Hardware Projects
+              Hardware
             </button>
           </div>
         </div>

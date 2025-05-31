@@ -53,7 +53,7 @@ const Footer = () => {
         </div>
         
         <div className={styles.copyright}>
-          &copy; {new Date().getFullYear()} Seeson Lau. All rights reserved.
+          &copy; {new Date().getFullYear()} Today is too hard. Do it tommorrow.
         </div>
       </div>
 

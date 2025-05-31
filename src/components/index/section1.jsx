@@ -20,7 +20,7 @@ const academicItems = [
   },
   {
     id: 3,
-    image: '/home-page/vp-icpepr7.JPG',
+    image: '/home-page/vp-icpepr7.jpg',
     title: 'Vice President',
     date: 'Aug 2024 - Present',
     company: 'Institute of Computer Engineers of the Philippines - Student Edition Region 7'
