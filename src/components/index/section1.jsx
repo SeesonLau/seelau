@@ -58,6 +58,17 @@ const academicItems = [
 const Section1 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (!isHovered) {
@@ -78,19 +89,27 @@ const Section1 = () => {
     );
   };
 
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
   return (
     <section className={styles.section} id="academic">
       <h2 className={styles.sectionTitle}>Academic Journey</h2>
       <p className={styles.sectionSubtitle}>Key milestones and achievements throughout my academic career</p>
       
       <div className={styles.carouselContainer}>
-        <button 
-          className={styles.carouselArrowLeft} 
-          onClick={prevSlide}
-          aria-label="Previous slide"
-        >
-          &lt;
-        </button>
+        {!isMobile && (
+          <button 
+            className={styles.carouselArrowLeft} 
+            onClick={prevSlide}
+            aria-label="Previous slide"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+        )}
         
         <div 
           className={styles.carousel}
@@ -105,7 +124,7 @@ const Section1 = () => {
                 width={600}
                 height={600}
                 className={styles.carouselImage}
-                priority
+                priority={currentIndex === 0}
               />
             </div>
             <div className={styles.carouselContent}>
@@ -117,29 +136,62 @@ const Section1 = () => {
             </div>
           </div>
           
-          <div className={styles.carouselDots}>
-            {academicItems.map((_, index) => (
-              <button
-                key={index}
-                className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ''}`}
-                onClick={() => setCurrentIndex(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+          <div className={styles.carouselControls}>
+            {isMobile && (
+              <button 
+                className={styles.mobileArrowLeft} 
+                onClick={prevSlide}
+                aria-label="Previous slide"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+              </button>
+            )}
+            
+            <div className={styles.carouselDots}>
+              {academicItems.map((_, index) => (
+                <button
+                  key={index}
+                  className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ''}`}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+            
+            {isMobile && (
+              <button 
+                className={styles.mobileArrowRight} 
+                onClick={nextSlide}
+                aria-label="Next slide"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+              </button>
+            )}
           </div>
         </div>
         
-        <button 
-          className={styles.carouselArrowRight} 
-          onClick={nextSlide}
-          aria-label="Next slide"
-        >
-          &gt;
-        </button>
+        {!isMobile && (
+          <button 
+            className={styles.carouselArrowRight} 
+            onClick={nextSlide}
+            aria-label="Next slide"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        )}
       </div>
       
       <Link href="/academic-life" className={styles.learnMoreButton}>
         View Full Journey
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
       </Link>
     </section>
   );

@@ -78,6 +78,7 @@
   margin: 0 auto 1.5rem;
   perspective: 1000px;
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .stackCard {
@@ -93,6 +94,7 @@
   transform-origin: bottom center;
   background: color-mix(in srgb, var(--color-primary) 30%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-border) 20%, transparent);
+  will-change: transform;
 }
 
 .stackImage {
@@ -118,6 +120,8 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modalContent {
@@ -133,6 +137,8 @@
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--color-border);
   width: 100%;
+  position: relative;
+  will-change: transform;
 }
 
 .modalTitle {
@@ -159,6 +165,7 @@
   overflow: hidden;
   box-shadow: var(--shadow-md);
   background: color-mix(in srgb, var(--color-secondary) 20%, transparent);
+  will-change: transform;
 }
 
 .bookImage {
@@ -240,7 +247,6 @@
   transform: translateY(1px);
 }
 
-
 .learnMoreButton::before {
   content: '';
   position: absolute;
@@ -255,6 +261,17 @@
 }
 .learnMoreButton:hover::before {
   opacity: 1;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .stackCard,
+  .book,
+  .modalContent,
+  .hobbyGroup {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 /* Responsive Design */
@@ -316,37 +333,4 @@
   .modalTitle {
     font-size: 1.5rem;
   }
-}
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.modalContent {
-  background: var(--color-primary);
-  border-radius: var(--border-radius-lg);
-  padding: 2rem;
-  max-width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--color-border);
-  width: 100%;
-  position: relative;
 }

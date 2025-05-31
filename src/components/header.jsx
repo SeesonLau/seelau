@@ -44,30 +44,26 @@ const Header = () => {
 
   return (
     <header className={`${styles.header} ${isScrolledDown ? styles.hidden : ''}`}>
-      <div className={styles.logoContainer}>
-        <div 
-          className={styles.circleLogo} 
-          onClick={handlePaletteChange}
-          data-tooltip="Click to change color theme"
-        >
+      <div 
+        className={styles.logoContainer}
+        onClick={handlePaletteChange}
+        data-tooltip="Change color theme"
+      >
+        <div className={styles.circleLogo}>
           <div className={styles.circleInner}>
             <div className={styles.circleSegment}></div>
             <div className={styles.circleSegment}></div>
             <div className={styles.circleSegment}></div>
           </div>
         </div>
-        <div 
-          className={styles.logoText} 
-          onClick={handlePaletteChange}
-          data-tooltip="Click to change color theme"
-        >
+        <div className={styles.logoText}>
           SEESON
         </div>
       </div>
 
       <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.mobileNavActive : ''}`}>
         <ul className={styles.navList}>
-          {['Home', 'Academic Life', 'Skills', 'Projects', 'Hobbies'].map((item) => (
+          {['Home', 'Academic Life', 'Projects', 'Hobbies', 'Skills'].map((item) => (
             <li key={item} className={styles.navItem}>
               <Link
                 href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}

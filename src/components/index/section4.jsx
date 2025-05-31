@@ -1,15 +1,34 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import styles from '@/styles/index/section4.module.css';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Animation variants
+const MODAL_ANIMATION = {
+  hidden: { opacity: 0, scale: 0.9, y: 20 },
+  visible: { opacity: 1, scale: 1, y: 0 },
+  exit: { opacity: 0, scale: 0.9, y: 20 }
+};
+
+const CARD_STACK_ANIMATION = {
+  initial: (index) => ({
+    rotate: index === 1 ? 0 : index === 0 ? -5 : 5,
+    y: index * -10
+  }),
+  animate: (expanded, index) => ({
+    rotate: expanded ? 0 : index === 1 ? 0 : index === 0 ? -5 : 5,
+    y: expanded ? index * -5 : index * -10
+  })
+};
+
 
 const Section4 = ({ hobbies }) => {
   const [expandedHobby, setExpandedHobby] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const containerRef = useRef(null);
   const modalRef = useRef(null);
-  const scrollPositionRef = useRef(0);
+
 
   // Mouse position tracking for background effect
   useEffect(() => {
@@ -30,38 +49,36 @@ const Section4 = ({ hobbies }) => {
     };
   }, []);
 
-  // Handle scroll locking when modal opens/closes
-  useEffect(() => {
-    if (expandedHobby) {
-      // Save current scroll position
-      scrollPositionRef.current = window.scrollY;
-      
-      // Lock scroll on body and html elements
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollPositionRef.current}px`;
-      document.body.style.width = '100%';
-      document.documentElement.style.overflow = 'hidden';
-    } else {
-      // Restore scroll
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.documentElement.style.overflow = '';
-      
-      // Restore scroll position
-      window.scrollTo(0, scrollPositionRef.current);
-    }
+  // Add this useEffect to handle background scrolling
+useEffect(() => {
+  if (expandedHobby) {
+    // Disable scrolling
+    document.body.style.overflow = 'hidden';
+  } else {
+    // Re-enable scrolling
+    document.body.style.overflow = '';
+  }
 
-    return () => {
-      // Cleanup
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.documentElement.style.overflow = '';
+  // Clean up on component unmount or state change
+  return () => {
+    document.body.style.overflow = '';
+  };
+}, [expandedHobby]);
+
+ 
+
+  // Keyboard accessibility
+  useEffect(() => {
+    if (!expandedHobby) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        handleClose();
+      }
     };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [expandedHobby]);
 
   const handleExpand = (id) => {
@@ -75,6 +92,8 @@ const Section4 = ({ hobbies }) => {
     setIsAnimating(true);
     setExpandedHobby(null);
   };
+
+  const currentHobby = hobbies.find(h => h.id === expandedHobby);
 
   return (
     <section className={styles.section} ref={containerRef}>
@@ -95,25 +114,23 @@ const Section4 = ({ hobbies }) => {
               onClick={() => handleExpand(hobby.id)}
               whileHover={!expandedHobby ? { scale: 1.05 } : {}}
               layout
+              aria-label={`View ${hobby.title} collection`}
+              role="button"
+              tabIndex={0}
             >
               <AnimatePresence>
                 {(!expandedHobby || expandedHobby === hobby.id) &&
                   hobby.images.slice(0, 3).map((image, index) => (
                     <motion.div
-                      key={index}
+                      key={`${hobby.id}-${index}`}
                       className={styles.stackCard}
                       style={{
                         zIndex: 10 - index,
                         background: `hsl(${index * 30}, 80%, 90%)`
                       }}
-                      initial={{
-                        rotate: index === 1 ? 0 : index === 0 ? -5 : 5,
-                        y: index * -10
-                      }}
-                      animate={{
-                        rotate: expandedHobby === hobby.id ? 0 : index === 1 ? 0 : index === 0 ? -5 : 5,
-                        y: expandedHobby === hobby.id ? index * -5 : index * -10
-                      }}
+                      custom={index}
+                      initial={CARD_STACK_ANIMATION.initial}
+                      animate={CARD_STACK_ANIMATION.animate(expandedHobby === hobby.id, index)}
                       transition={{
                         duration: 0.7,
                         type: 'spring',
@@ -126,6 +143,8 @@ const Section4 = ({ hobbies }) => {
                         alt={`${hobby.title} ${index + 1}`}
                         fill
                         className={styles.stackImage}
+                        priority={index === 0}
+                        loading={index > 0 ? 'lazy' : undefined}
                       />
                     </motion.div>
                   ))}
@@ -141,6 +160,7 @@ const Section4 = ({ hobbies }) => {
           </motion.div>
         ))}
       </div>
+      
       <AnimatePresence>
         {expandedHobby && (
           <motion.div
@@ -151,21 +171,25 @@ const Section4 = ({ hobbies }) => {
             transition={{ duration: 0.3 }}
             onClick={handleClose}
             ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
           >
             <motion.div 
               className={styles.modalContent}
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
+              variants={MODAL_ANIMATION}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className={styles.modalTitle}>
-                {hobbies.find(h => h.id === expandedHobby).title}
+              <h3 id="modal-title" className={styles.modalTitle}>
+                {currentHobby?.title}
               </h3>
               <div className={styles.bookshelf}>
-                {hobbies.find((h) => h.id === expandedHobby).images.map((image, index) => (
+                {currentHobby?.images.map((image, index) => (
                   <motion.div
-                    key={index}
+                    key={`modal-${index}`}
                     className={styles.book}
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -178,9 +202,10 @@ const Section4 = ({ hobbies }) => {
                   >
                     <Image 
                       src={image} 
-                      alt={`${expandedHobby} ${index + 1}`} 
+                      alt={`${currentHobby.title} ${index + 1}`} 
                       fill 
-                      className={styles.bookImage} 
+                      className={styles.bookImage}
+                      priority={index < 3}
                     />
                   </motion.div>
                 ))}
@@ -190,6 +215,7 @@ const Section4 = ({ hobbies }) => {
                 onClick={handleClose}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="Close collection"
               >
                 Close Collection
               </motion.button>
@@ -197,6 +223,7 @@ const Section4 = ({ hobbies }) => {
           </motion.div>
         )}
       </AnimatePresence>
+      
       {!expandedHobby && (
         <div className={styles.buttonWrapper}>
           <Link href="/hobbies" className={styles.learnMoreButton}>

@@ -1,17 +1,18 @@
 /* Section 3: Projects */
 .section {
-  padding: 4rem 1rem;
+  padding: 2rem 1rem;
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .sectionTitleContainer {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   width: 100%;
 }
 
@@ -19,25 +20,22 @@
   font-size: clamp(1.8rem, 5vw, 2.5rem);
   color: var(--color-accent);
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 
-/* Projects Grid Layout */
-.projectsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  max-width: 1200px;
+.sectionSubtitle {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  max-width: 600px;
   margin: 0 auto;
-  width: 100%;
-  padding: 0 1rem;
 }
 
+/* Project Container */
 .projectContainer {
   background: color-mix(in srgb, var(--color-primary) 85%, transparent);
-  border-radius: 16px;
+  border-radius: 24px;
   padding: 1.5rem;
   box-shadow: 
     0 8px 30px rgba(0, 0, 0, 0.3),
@@ -47,6 +45,13 @@
   position: relative;
   backdrop-filter: blur(8px);
   border: 1px solid color-mix(in srgb, var(--color-border) 20%, transparent);
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
 }
 
 .projectContainer:hover {
@@ -56,36 +61,41 @@
     inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 25%, transparent);
 }
 
-.projectTypeTitle {
-  text-align: center;
-  color: var(--color-text);
+/* Project Type Selector */
+.projectTypeSelector {
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  width: 100%;
+}
+
+.typeButtonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.typeButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: color-mix(in srgb, var(--color-primary) 70%, transparent);
+  color: var(--color-text-secondary);
   font-weight: 600;
-  position: relative;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 20%, transparent);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.projectTypeTitle::before,
-.projectTypeTitle::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--color-accent),
-    transparent
-  );
+.typeButton.active {
+  background: var(--color-accent);
+  color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-accent), 0 4px 8px var(--glow-primary);
 }
 
-.projectTypeTitle::before {
-  left: -50px;
-}
-
-.projectTypeTitle::after {
-  right: -50px;
+.typeButton:hover:not(.active) {
+  background: color-mix(in srgb, var(--color-primary) 60%, transparent);
+  color: var(--color-text);
 }
 
 /* Project Carousel */
@@ -94,29 +104,57 @@
   align-items: center;
   gap: 1rem;
   position: relative;
+  flex: 1;
+  overflow: hidden;
 }
 
 .carouselContent {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
+  height: 100%;
 }
 
+/* Image Container - Desktop */
 .projectImageContainer {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1/1;
-  border-radius: 12px;
+  margin: 0 auto;
+  border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  flex: 1;
+  aspect-ratio: 1/1;
+  max-height: 400px;
+}
+
+/* Image Container - Mobile */
+.mobileImageContainer {
+  max-height: 300px;
+  width: 100%;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .projectImage {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+}
+
+.projectImageContainer.animating {
+  opacity: 0.7;
+  transform: scale(0.98);
 }
 
 .projectContainer:hover .projectImage {
@@ -127,30 +165,42 @@
   text-align: center;
   color: var(--color-text-secondary);
   font-size: 1rem;
-  line-height: 1.5;
-  padding: 1rem;
+  line-height: 1.4;
+  padding: 0.8rem;
   background: color-mix(in srgb, var(--color-primary) 70%, transparent);
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid color-mix(in srgb, var(--color-border) 20%, transparent);
-  min-height: 80px;
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+
+/* Carousel Navigation */
+.carouselNavigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
 .carouselButton {
   background: color-mix(in srgb, var(--color-secondary) 40%, transparent);
   color: var(--color-text);
   border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
   font-weight: bold;
   backdrop-filter: blur(4px);
   z-index: 2;
@@ -163,18 +213,27 @@
 .carouselButton:hover {
   background: color-mix(in srgb, var(--color-secondary) 60%, transparent);
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .carouselButton:active {
   transform: scale(0.95);
 }
 
+.carouselButton svg {
+  transition: transform 0.2s ease;
+}
+
+.carouselButton:hover svg {
+  transform: scale(1.2);
+}
+
 /* Carousel Indicators */
 .carouselIndicators {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  margin-top: 0.5rem;
+  gap: 0.8rem;
 }
 
 .carouselIndicator {
@@ -190,7 +249,7 @@
 
 .carouselIndicator.active {
   background: var(--color-accent);
-  transform: scale(1.2);
+  width: 20px;
   box-shadow: 0 0 8px var(--glow-primary);
 }
 
@@ -198,7 +257,7 @@
 .buttonContainer {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   width: 100%;
 }
 
@@ -243,7 +302,6 @@
   transform: translateY(1px);
 }
 
-
 .learnMoreButton::before {
   content: '';
   position: absolute;
@@ -262,87 +320,107 @@
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-  .projectsGrid {
-    gap: 1.2rem;
-  }
-  
   .projectContainer {
-    padding: 1.2rem;
+    padding: 1.25rem;
+    border-radius: 20px;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 3rem 1rem;
+    padding: 1.5rem 1rem;
+    height: auto;
+    min-height: 100vh;
   }
   
-  .projectsGrid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
+  .projectContainer {
+    max-height: none;
+    padding: 1rem;
   }
   
-  .projectTypeTitle::before,
-  .projectTypeTitle::after {
-    width: 30px;
+  .typeButtonsContainer {
+    flex-direction: column;
+    gap: 0.5rem;
   }
   
-  .projectTypeTitle::before {
-    left: -40px;
+  .typeButton {
+    width: 100%;
+    padding: 0.75rem;
   }
   
-  .projectTypeTitle::after {
-    right: -40px;
+  .projectDescription {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+    min-height: 50px;
+  }
+  
+  .learnMoreButton {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
   }
   
   .carouselButton {
-    width: 50px;
-    height: 50px;
-    font-size: 1.3rem;
+    width: 38px;
+    height: 38px;
   }
 }
 
 @media (max-width: 480px) {
   .section {
-    padding: 2rem 0.5rem;
-    min-height: auto;
+    padding: 1rem 0.5rem;
   }
   
   .projectContainer {
     padding: 1rem;
-  }
-  
-  .projectTypeTitle {
-    font-size: 1.3rem;
-  }
-  
-  .projectTypeTitle::before,
-  .projectTypeTitle::after {
-    width: 20px;
-  }
-  
-  .projectTypeTitle::before {
-    left: -30px;
-  }
-  
-  .projectTypeTitle::after {
-    right: -30px;
+    border-radius: 16px;
   }
   
   .projectDescription {
-    font-size: 0.9rem;
-    padding: 0.8rem;
-    min-height: 70px;
+    font-size: 0.85rem;
+    padding: 0.6rem;
+    min-height: 40px;
+    border-radius: 10px;
   }
   
   .learnMoreButton {
-    padding: 0.7rem 1.5rem;
-    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  .carouselButton {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+  
+  .carouselIndicator {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .carouselIndicator.active {
+    width: 16px;
   }
 }
 
-@media (max-width: 380px) {
-  .projectTypeTitle::before,
-  .projectTypeTitle::after {
-    display: none;
+/* Fallback for browsers that don't support aspect-ratio */
+@supports not (aspect-ratio: 1/1) {
+  .projectImageContainer {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+  }
+  
+  .mobileImageContainer {
+    padding-bottom: 100%;
+    height: auto;
+  }
+  
+  .imageWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }

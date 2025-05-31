@@ -111,9 +111,9 @@ export default function Home({ hobbies }) {
         </section>
 
         <Section1 />
-        <Section2 />
         <Section3 />
         <Section4 hobbies={hobbies} />
+        <Section2 />
       </div>
     </Layout>
   );

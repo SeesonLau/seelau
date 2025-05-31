@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useState } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaCheck } from 'react-icons/fa';
 import styles from '@/styles/footer.module.css';
@@ -15,12 +14,12 @@ const Footer = () => {
 
   return (
     <footer className={styles.footer}>
+      {/* Circuit background elements */}
+      <div className={`${styles.circuitSide} ${styles.circuitLeft}`}></div>
+      <div className={`${styles.circuitSide} ${styles.circuitRight}`}></div>
+      <div className={styles.circuitBackground}></div>
+      
       <div className={styles.footerContent}>
-        <div className={styles.contact}>
-          <h3 className={styles.footerTitle}>Contact Me</h3>
-          <p>{email}</p>
-        </div>
-        
         <div className={styles.socialLinks}>
           <a 
             href="https://github.com/SeesonLau"
@@ -46,16 +45,16 @@ const Footer = () => {
             aria-label="Copy Email"
           >
             {emailCopied ? (
-              <FaCheck className={styles.socialIcon} style={{ color: 'var(--color-accent)' }} />
+              <FaCheck className={styles.socialIcon} />
             ) : (
               <FaEnvelope className={styles.socialIcon} />
             )}
           </button>
         </div>
-      </div>
-      
-      <div className={styles.copyright}>
-        &copy; {new Date().getFullYear()} Seeson. All rights reserved.
+        
+        <div className={styles.copyright}>
+          &copy; {new Date().getFullYear()} Seeson Lau. All rights reserved.
+        </div>
       </div>
 
       {emailCopied && (
