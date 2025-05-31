@@ -1,5 +1,5 @@
 import Layout from '@/components/layout';
-import styles from '../styles/Page.module.css';
+import styles from '@/styles/page.module.css';
 
 export default function Skills() {
   const skillCategories = [
