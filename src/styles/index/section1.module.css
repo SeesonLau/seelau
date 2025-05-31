@@ -1,0 +1,287 @@
+/* Section 1: Academic Journey */
+.section {
+  padding: 6rem 2rem;
+  position: relative;
+  background: transparent;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: var(--color-accent);
+  position: relative;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-bottom: 3rem;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Carousel Container */
+.carouselContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+/* Carousel Styles */
+.carousel {
+  max-width: 1000px;
+  width: 100%;
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  background: transparent;
+}
+
+.carouselItem {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  background: color-mix(in srgb, var(--color-primary) 70%, transparent);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.carouselImageContainer {
+  width: 45%;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.carouselImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.carouselContent {
+  width: 55%;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contentHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemDate {
+  display: block;
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.itemTitle {
+  color: var(--color-text);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.itemCompany {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.carouselArrowLeft,
+.carouselArrowRight {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.carouselArrowLeft:hover,
+.carouselArrowRight:hover {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  gap: 0.8rem;
+  background: transparent;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-text) 20%, transparent);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.activeDot {
+  background: var(--color-accent);
+  transform: scale(1.2);
+}
+
+/* Learn More Button */
+.learnMoreButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(45deg, var(--color-accent), var(--color-secondary));
+  color: var(--color-text);
+  text-align: center;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--glow-primary);
+  margin: 0 auto;
+  display: block;
+  width: fit-content;
+}
+
+.learnMoreButton svg {
+  transition: transform 0.3s ease;
+}
+
+.learnMoreButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--glow-primary);
+}
+
+.learnMoreButton:hover svg {
+  transform: translateX(5px);
+}
+
+.learnMoreButton:active {
+  transform: translateY(1px);
+}
+
+
+.learnMoreButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--color-secondary), var(--color-accent));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.learnMoreButton:hover::before {
+  opacity: 1;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .carouselItem {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .carouselImageContainer {
+    width: 100%;
+    min-height: 300px;
+    aspect-ratio: 16/9;
+  }
+  
+  .carouselContent {
+    width: 100%;
+    padding: 2rem;
+  }
+  
+  .itemTitle {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+  
+  .carouselArrowLeft,
+  .carouselArrowRight {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .carouselArrowLeft {
+    left: 10px;
+  }
+  
+  .carouselArrowRight {
+    right: 10px;
+  }
+  
+  .carouselContainer {
+    gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+  
+  .carouselContent {
+    padding: 1.5rem;
+  }
+  
+  .itemTitle {
+    font-size: 1.3rem;
+  }
+  
+  .learnMoreButton {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}

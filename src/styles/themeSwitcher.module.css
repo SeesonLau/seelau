@@ -1,0 +1,13 @@
+.themeSwitcher {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+  color: inherit;
+}
+
+.themeSwitcher:hover {
+  transform: scale(1.1);
+}

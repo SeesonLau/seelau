@@ -1,0 +1,350 @@
+/* page.module.css */
+.pageContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.pageTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--color-text-secondary);
+}
+
+.section {
+  margin-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+.sectionDescription {
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Timeline styles */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.timelineItem::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-border);
+  border: 3px solid var(--color-primary);
+}
+
+.timelineDate {
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+/* Card styles */
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: rgba(40, 30, 48, 0.7);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border);
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.list {
+  padding-left: 1.5rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+/* Skills progress bars */
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.skillCategory {
+  margin-bottom: 2rem;
+}
+
+.skillCategoryTitle {
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.skillItem {
+  margin-bottom: 1rem;
+}
+
+.skillInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.skillName {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.skillLevel {
+  color: var(--color-text-secondary);
+}
+
+.progressBar {
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--color-border);
+  border-radius: 4px;
+}
+
+/* Project cards */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.projectCard {
+  background: rgba(40, 30, 48, 0.7);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  border: 1px solid var(--color-border);
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+}
+
+.projectImageContainer {
+  position: relative;
+}
+
+.projectImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.projectType {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.software {
+  background-color: var(--color-accent);
+}
+
+.hardware {
+  background-color: var(--color-border);
+}
+
+.projectContent {
+  padding: 1.5rem;
+}
+
+.projectTitle {
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.projectDescription {
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.techPill {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.viewButton {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.viewButton:hover {
+  background-color: var(--color-border);
+  color: var(--color-text);
+}
+
+/* Hobby styles */
+.hobbySection {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hobbyTitle {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.hobbyDescription {
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.hobbyDetails {
+  display: flex;
+  gap: 2rem;
+}
+
+.hobbyGallery {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hobbyImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  border: 1px solid var(--color-border);
+}
+
+.hobbyImage:hover {
+  transform: scale(1.05);
+}
+
+.favoritesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.favoriteCard {
+  text-align: center;
+  background: rgba(40, 30, 48, 0.7);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border);
+}
+
+.favoriteImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-top: 1rem;
+  border: 1px solid var(--color-border);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.tabButton {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--color-text);
+}
+
+.tabButton:hover {
+  background-color: var(--color-border);
+}
+
+.tabButton.active {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .hobbyDetails {
+    flex-direction: column;
+  }
+  
+  .pageContainer {
+    padding: 1rem;
+  }
+  
+  .projectsGrid, .cardContainer {
+    grid-template-columns: 1fr;
+  }
+}
