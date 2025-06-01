@@ -10,10 +10,12 @@
   padding: 2rem;
   position: relative;
   z-index: 1;
+  margin-top: 80px; /* Add this line - adjust based on your header height */
 }
 
 @media (max-width: 768px) {
   .main {
     padding: 1rem;
+    margin-top: 70px; /* Slightly smaller margin for mobile */
   }
 }

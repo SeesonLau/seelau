@@ -10,9 +10,11 @@ const SectionNav = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      if (typeof window === 'undefined') return;
+
       const currentScrollY = window.scrollY;
 
-      // Hide/show logic - only hide if scrolling down, show if scrolling up
+      // Hide/show logic
       if (currentScrollY <= 100) {
         setIsHidden(false);
         setScrolledDown(false);
@@ -42,14 +44,30 @@ const SectionNav = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Throttle scroll handler
+    const throttledScroll = () => {
+      let ticking = false;
+      return () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            handleScroll();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+    };
+
+    window.addEventListener('scroll', throttledScroll(), { passive: true });
+    return () => window.removeEventListener('scroll', throttledScroll());
   }, [lastScrollY, scrolledDown]);
 
   return (
-    <nav className={`${styles.sectionNav} ${isHidden ? styles.hidden : ''}`}>
+    <nav 
+      className={`${styles.sectionNav} ${isHidden ? styles.hidden : ''}`}
+      aria-label="Section navigation"
+    >
       <div className={styles.navContainer}>
-        <div className={styles.navCurveLeft}></div>
         <ul className={styles.navList}>
           {[
             { id: 'section1', name: 'What "I"' },
@@ -62,6 +80,7 @@ const SectionNav = () => {
                 href={`#${item.id}`}
                 className={`${styles.navLink} ${activeSection === item.id ? styles.active : ''}`}
                 scroll={false}
+                aria-current={activeSection === item.id ? 'page' : undefined}
               >
                 <span className={styles.linkText}>{item.name}</span>
                 <span className={styles.linkIndicator}></span>
@@ -69,7 +88,6 @@ const SectionNav = () => {
             </li>
           ))}
         </ul>
-        <div className={styles.navCurveRight}></div>
       </div>
     </nav>
   );

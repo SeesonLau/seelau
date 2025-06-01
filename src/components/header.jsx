@@ -3,10 +3,18 @@ import Link from 'next/link';
 import styles from '@/styles/header.module.css';
 import { useTheme } from '@/utils/themeContext';
 
+// Import icons from react-icons
+import { 
+  FaHome, 
+  FaGraduationCap, 
+  FaProjectDiagram, 
+  FaGamepad, 
+  FaCode 
+} from 'react-icons/fa';
+
 const Header = () => {
   const [isScrolledDown, setIsScrolledDown] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -24,23 +32,21 @@ const Header = () => {
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    document.body.style.overflow = isMobileMenuOpen ? 'auto' : 'hidden';
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-    document.body.style.overflow = 'auto';
-  };
 
   const handlePaletteChange = () => {
     toggleTheme();
   };
+
+  const navItems = [
+    { name: 'Home', path: '/', icon: <FaHome /> },
+    { name: 'Academic Life', path: '/academic-life', icon: <FaGraduationCap /> },
+    { name: 'Projects', path: '/projects', icon: <FaProjectDiagram /> },
+    { name: 'Hobbies', path: '/hobbies', icon: <FaGamepad /> },
+    { name: 'Skills', path: '/skills', icon: <FaCode /> }
+  ];
 
   return (
     <header className={`${styles.header} ${isScrolledDown ? styles.hidden : ''}`}>
@@ -48,6 +54,7 @@ const Header = () => {
         className={styles.logoContainer}
         onClick={handlePaletteChange}
         data-tooltip="Change color theme"
+        aria-label="Change color theme"
       >
         <div className={styles.circleLogo}>
           <div className={styles.circleInner}>
@@ -61,41 +68,23 @@ const Header = () => {
         </div>
       </div>
 
-      <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.mobileNavActive : ''}`}>
+      <nav className={styles.nav}>
         <ul className={styles.navList}>
-          {['Home', 'Academic Life', 'Projects', 'Hobbies', 'Skills'].map((item) => (
-            <li key={item} className={styles.navItem}>
+          {navItems.map((item) => (
+            <li key={item.name} className={styles.navItem}>
               <Link
-                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                href={item.path}
                 className={styles.navLink}
-                onClick={closeMobileMenu}
+                prefetch={true}
+                aria-current={typeof window !== 'undefined' && window.location.pathname === item.path ? 'page' : undefined}
               >
-                {item}
+                <span className={styles.navIcon}>{item.icon}</span>
+                <span className={styles.navText}>{item.name}</span>
               </Link>
             </li>
           ))}
         </ul>
       </nav>
-
-      <button 
-        className={styles.mobileMenuButton} 
-        onClick={toggleMobileMenu}
-        aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-        aria-expanded={isMobileMenuOpen}
-      >
-        {isMobileMenuOpen ? (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        ) : (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        )}
-      </button>
     </header>
   );
 };

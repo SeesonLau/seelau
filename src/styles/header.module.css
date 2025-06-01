@@ -2,18 +2,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
-  background-color: rgba(var(--color-primary-rgb), 0.9);
+  padding: clamp(0.75rem, 2vw, 1.5rem) clamp(1rem, 3vw, 2rem);
+  background-color: rgba(var(--color-primary-rgb), 0.95);
   border-bottom: 1px solid var(--color-border);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: all 0.4s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transform: translateY(0);
+  will-change: transform;
 }
 
 .header.hidden {
@@ -23,7 +24,7 @@
 .logoContainer {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
   cursor: pointer;
   transition: transform 0.3s ease;
   position: relative;
@@ -34,19 +35,23 @@
 }
 
 .logoText {
-  font-size: 1.8rem;
+  font-size: clamp(1.25rem, 4vw, 1.8rem);
   font-weight: 700;
   color: var(--color-accent);
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   transition: color 0.3s;
 }
 
 .navList {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
   margin: 0;
   padding: 0;
+}
+
+.navItem {
+  position: relative;
 }
 
 .navLink {
@@ -55,8 +60,10 @@
   font-weight: 500;
   padding: 0.5rem 0;
   position: relative;
-  transition: all 0.3s ease;
-  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .navLink:hover {
@@ -71,82 +78,33 @@
   width: 0;
   height: 2px;
   background-color: var(--color-accent);
-  transition: width 0.3s ease;
+  transition: width 0.2s ease;
 }
 
 .navLink:hover::after {
   width: 100%;
 }
 
-.mobileMenuButton {
-  display: none;
-  background: none;
-  border: none;
+.navLink[aria-current="page"] {
   color: var(--color-accent);
-  cursor: pointer;
-  transition: transform 0.3s;
-  z-index: 1001;
-  padding: 0.5rem;
-  border-radius: 4px;
 }
 
-.mobileMenuButton:hover {
-  transform: scale(1.1);
-  background: rgba(var(--color-accent-rgb), 0.1);
+.navLink[aria-current="page"]::after {
+  width: 100%;
 }
 
-.mobileMenuButton svg {
+.navIcon {
+  display: none;
+  font-size: 1.2rem;
+}
+
+.navText {
   display: block;
 }
 
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(var(--color-primary-rgb), 0.98);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    padding: 2rem;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.3s ease;
-  }
-
-  .mobileNavActive {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .navList {
-    flex-direction: column;
-    gap: 2.5rem;
-    text-align: center;
-  }
-
-  .navLink {
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .mobileMenuButton {
-    display: block;
-  }
-
-  .header {
-    padding: 1rem 1.5rem;
-  }
-}
-
 .circleLogo {
-  width: 40px;
-  height: 40px;
+  width: clamp(32px, 8vw, 40px);
+  height: clamp(32px, 8vw, 40px);
   border-radius: 50%;
   background-color: var(--color-accent);
   display: flex;
@@ -162,8 +120,8 @@
 }
 
 .circleInner {
-  width: 30px;
-  height: 30px;
+  width: 70%;
+  height: 70%;
   position: relative;
 }
 
@@ -193,3 +151,120 @@
   border-color: var(--color-text);
 }
 
+@media (max-width: 768px) {
+  .navList {
+    gap: 1.5rem;
+  }
+
+  .navIcon {
+    display: block;
+  }
+
+  .navText {
+    display: none;
+  }
+
+  .navLink {
+    padding: 0.5rem;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    justify-content: center;
+  }
+
+  .navLink:hover {
+    background-color: rgba(var(--color-accent-rgb), 0.1);
+    transform: scale(1.1);
+  }
+
+  .navLink::after {
+    display: none;
+  }
+
+  .navLink[aria-current="page"] {
+    background-color: rgba(var(--color-accent-rgb), 0.1);
+    color: var(--color-accent);
+  }
+}
+
+@media (max-width: 425px) {
+  .header {
+    padding: 0.75rem 1rem;
+  }
+
+  .logoText {
+    font-size: 1.3rem;
+  }
+
+  .navList {
+    gap: 1rem;
+  }
+
+  .navIcon {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .logoContainer {
+    gap: 0.5rem;
+  }
+
+  .logoText {
+    font-size: 1.2rem;
+  }
+
+  .navList {
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .header {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .logoText {
+    font-size: 1.1rem;
+  }
+
+  .navList {
+    gap: 0.6rem;
+  }
+
+  .navIcon {
+    font-size: 1rem;
+  }
+}
+
+/* Add this new media query */
+@media (max-width: 375px) {
+  .logoText {
+    display: none;
+  }
+
+  .logoContainer {
+    gap: 0;
+  }
+
+  .navList {
+    gap: 0.5rem;
+  }
+
+  .navIcon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .header {
+    padding: 0.5rem 0.6rem;
+  }
+
+  .navList {
+    gap: 0.4rem;
+  }
+
+  .navLink {
+    padding: 0.4rem;
+  }
+}
