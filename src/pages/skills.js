@@ -6,40 +6,30 @@ export default function Skills() {
     {
       title: 'Programming Languages',
       skills: [
-        { name: 'JavaScript', level: 90 },
-        { name: 'Python', level: 85 },
-        { name: 'C++', level: 80 },
-        { name: 'Java', level: 75 },
-        { name: 'TypeScript', level: 85 }
+        { name: 'C#', level: 95 },
+        { name: 'Python', level: 70 },
+        { name: 'C/C++', level: 85 },
+        { name: 'Javascript', level: 85 },
+        { name: 'TypeScript', level: 60 }
       ]
     },
     {
-      title: 'Web Development',
+      title: 'Development',
       skills: [
         { name: 'React', level: 90 },
-        { name: 'Next.js', level: 85 },
-        { name: 'Node.js', level: 80 },
-        { name: 'Express', level: 75 },
+        { name: 'Next.js', level: 95 },
+        { name: 'Node.js', level: 90 },
+        { name: '.NET', level: 90 },
         { name: 'HTML/CSS', level: 95 }
-      ]
-    },
-    {
-      title: 'Data Science',
-      skills: [
-        { name: 'Pandas', level: 85 },
-        { name: 'NumPy', level: 80 },
-        { name: 'TensorFlow', level: 75 },
-        { name: 'PyTorch', level: 70 },
-        { name: 'SQL', level: 85 }
       ]
     },
     {
       title: 'Tools & Platforms',
       skills: [
-        { name: 'Git', level: 90 },
-        { name: 'Docker', level: 75 },
-        { name: 'AWS', level: 70 },
-        { name: 'Figma', level: 80 },
+        { name: 'Git', level: 100 },
+        { name: 'AutoCad Eagle', level: 80 },
+        { name: 'AutoCad Autodesk', level: 95 },
+        { name: 'Cisco Packet Tracer', level: 95 },
         { name: 'VS Code', level: 95 }
       ]
     }
@@ -53,7 +43,7 @@ export default function Skills() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Technical Proficiency</h2>
           <p className={styles.sectionDescription}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.
+            Things I know and my proficiency with them:
           </p>
           
           <div className={styles.skillsGrid}>
@@ -85,19 +75,9 @@ export default function Skills() {
           <h2 className={styles.sectionTitle}>Certifications</h2>
           <div className={styles.cardContainer}>
             <div className={styles.card}>
-              <h3>Advanced React Developer</h3>
-              <p className={styles.subtitle}>React Institute, 2023</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div className={styles.card}>
-              <h3>AWS Certified Developer</h3>
-              <p className={styles.subtitle}>Amazon Web Services, 2022</p>
-              <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-            <div className={styles.card}>
-              <h3>Python for Data Science</h3>
-              <p className={styles.subtitle}>Data Science Council, 2021</p>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation.</p>
+              <h3>Technical Drafting NC II</h3>
+              <p className={styles.subtitle}>TESDA, 2020</p>
+              <p>details hereeeeeeeeeeeeee.</p>
             </div>
           </div>
         </section>

@@ -5,7 +5,7 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: 'E-commerce Platform',
+      title: 'Placeholder',
       type: 'Software',
       description: 'A full-stack e-commerce solution with React frontend and Node.js backend',
       technologies: ['React', 'Node.js', 'MongoDB', 'Stripe API'],
@@ -13,7 +13,7 @@ export default function Projects() {
     },
     {
       id: 2,
-      title: 'Smart Home Controller',
+      title: 'Placeholder',
       type: 'Hardware',
       description: 'IoT device to control home appliances with voice commands',
       technologies: ['Raspberry Pi', 'Python', 'AWS IoT', 'React Native'],
@@ -21,7 +21,7 @@ export default function Projects() {
     },
     {
       id: 3,
-      title: 'Portfolio Website',
+      title: 'Placeholder',
       type: 'Software',
       description: 'Personal portfolio website built with Next.js',
       technologies: ['Next.js', 'CSS Modules', 'Vercel'],
@@ -29,7 +29,7 @@ export default function Projects() {
     },
     {
       id: 4,
-      title: 'Autonomous Robot',
+      title: 'Placeholder',
       type: 'Hardware',
       description: 'Line-following robot with object detection capabilities',
       technologies: ['Arduino', 'Computer Vision', 'PID Control'],
@@ -76,20 +76,6 @@ export default function Projects() {
                 </div>
               </div>
             ))}
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Open Source Contributions</h2>
-          <div className={styles.card}>
-            <h3>React Native Community</h3>
-            <p className={styles.subtitle}>Contributor since 2022</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
-            <ul className={styles.list}>
-              <li>Fixed critical bug in navigation system</li>
-              <li>Improved documentation for new contributors</li>
-              <li>Implemented new feature for accessibility</li>
-            </ul>
           </div>
         </section>
       </div>

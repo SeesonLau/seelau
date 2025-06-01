@@ -6,11 +6,11 @@ export default function Hobbies() {
     {
       id: 1,
       title: 'Gaming',
-      description: 'Competitive gaming and exploring game design principles',
+      description: 'Casdasdasdas',
       details: [
-        'Ranked in top 500 players in Valorant',
-        'Participation in local esports tournaments',
-        'Game modding and level design'
+        'detailsssssssssssssssssssssssssssssssss here',
+        'detailsssssssssssssssssssssssssssssssss here',
+        'detailsssssssssssssssssssssssssssssssss here'
       ],
       images: ['/hutao.jpg', '/hutao.jpg', '/hutao.jpg']
     },
@@ -19,20 +19,20 @@ export default function Hobbies() {
       title: 'Anime & Manga',
       description: 'Enthusiastic consumer and analyst of Japanese animation and comics',
       details: [
-        'Collection of 200+ manga volumes',
-        'Anime blog with 10k monthly readers',
-        'Participation in cosplay events'
+        'detailsssssssssssssssssssssssssssssssss here',
+        'Adetailsssssssssssssssssssssssssssssssss here',
+        'detailsssssssssssssssssssssssssssssssss here'
       ],
       images: ['/hutao.jpg', '/hutao.jpg']
     },
     {
       id: 3,
-      title: 'Photography',
-      description: 'Capturing moments and exploring visual storytelling',
+      title: 'Electronics',
+      description: 'bzzzz',
       details: [
-        'Specialize in landscape and urban photography',
-        'Exhibited in local art gallery',
-        'Post-processing with Lightroom and Photoshop'
+        'detailsssssssssssssssssssssssssssssssss here',
+        'detailsssssssssssssssssssssssssssssssss here',
+        'detailsssssssssssssssssssssssssssssssss here'
       ],
       images: ['/hutao.jpg', '/hutao.jpg', '/hutao.jpg']
     }
@@ -76,17 +76,17 @@ export default function Hobbies() {
           <div className={styles.favoritesGrid}>
             <div className={styles.favoriteCard}>
               <h3>Favorite Game</h3>
-              <p>Genshin Impact</p>
+              <p>Placeholder Title Thing Here</p>
               <img src="/hutao.jpg" alt="Favorite game" className={styles.favoriteImage} />
             </div>
             <div className={styles.favoriteCard}>
               <h3>Favorite Anime</h3>
-              <p>Attack on Titan</p>
+              <p>Placeholder Title Thing Here</p>
               <img src="/hutao.jpg" alt="Favorite anime" className={styles.favoriteImage} />
             </div>
             <div className={styles.favoriteCard}>
               <h3>Favorite Manga</h3>
-              <p>Berserk</p>
+              <p>Placeholder Title Thing Here</p>
               <img src="/hutao.jpg" alt="Favorite manga" className={styles.favoriteImage} />
             </div>
           </div>
